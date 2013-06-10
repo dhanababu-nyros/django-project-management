@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user_invalid %}
+<p>{{user_invalid}}</p>
+{% endif %}
+<form action="" method="post" class="form-horizontal form-horizontal" novalidate="novalidate">
+{% csrf_token %}
+{% if form.errors %}<p>Please correct the following fields:</p>{% endif %}
+<div class="form-inputs">
+    
+<div class="register_div">
+        {% if form.username.errors %}<p class="error">{{ form.username.errors }}</p>{% endif %}
+        <p><label for="username"{% if form.username.errors %} class="error"{% endif %}>Username:</label></p>
+        <p>{{ form.username }}</p>
+</div>
+<div class="register_div">
+        {% if form.password.errors %}<p class="error">{{ form.password.errors }}</p>{% endif %}
+        <p><label for="password"{% if form.password.errors %} class="error"{% endif %}>Password:</label></p>
+        <p>{{ form.password }}</p>
+</div>
+</div>
+
+<p><input class="btn btn btn-primary" type="submit" alt="register" value='Login'/></p>
+
+</form>
+<p>Forgot your password? <a href="/resetpassword/">Reset it!</a></p>
+{% endblock %}

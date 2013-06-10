@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+
+    <script>
+        $(function() {
+            $( "#id_etd_eta" ).datepicker({
+                autoSize:true
+                //changeMonth: true
+                //changeYear: true,
+                //yearRange: "1920:2012"
+            });
+            
+            $('#file_upload').uploadify({
+                'swf'      : '{{STATIC_URL}}jquery/uploadify.swf',
+        'uploader' : "/addtask/{{project_id}}"
+        // Put your options here
+    });
+  
+        });
+    </script>
+{% endblock extra_head %}
+{% block content %}
+    <div class="container">
+        <div class="form-actions">
+        <form method='POST' action="" class="form-horizontal" enctype='multipart/form-data'>
+
+                <legend>Task Form</legend>
+            {% csrf_token %}
+            {% if form.errors %} <p class="errorlist">Please correct the errors below</p> {% endif %}
+            {{ form.as_table }}
+            <p><input type=file id='my_file_' class='multi' accept='gif|jpeg|jpg|png|pdf|doc' name="file[]" multiple></p>
+            <div id="files_list"></div>
+                <br><br><input type="submit" value="Create Task"  class="btn btn btn-primary">
+
+            <a class="btn btn-medium" href="/projecttasks/{{project_id}}">Back</a>
+        </form><!--<input type="file" name="file_upload" id="file_upload" />-->
+    </div></div>
+<script>
+	<!--Create an instance of the multiSelector class, pass it the output target and the max number of files-->
+	var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), 3 );
+	<!-- Pass in the file element -->
+	multi_selector.addElement( document.getElementById( 'my_file_element' ) );
+</script>
+ <script src='{{STATIC_URL}}jquery/jquery.form.js' type="text/javascript" language="javascript"></script>
+ <script src='{{STATIC_URL}}jquery/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+ <script src='{{STATIC_URL}}jquery/jquery.MultiFile.js' type="text/javascript" language="javascript"></script>
+ <script src='{{STATIC_URL}}jquery/jquery.blockUI.js' type="text/javascript" language="javascript"></script>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Project- Edit Project</title>
+{% endblock title %}
+{% block extra_head %}
+    <script>
+        $(function() {
+            $( "#id_etd_eta" ).datepicker({
+                autoSize:true
+            });
+        });
+    </script>
+ {% endblock extra_head %}
+{% block content %}
+    <div class="container" >
+    <p>Edit Project </p>
+        {% if form.errors %} <p class="errorlist">Please correct the errors below</p> {% endif %}
+    <form method="POST" ACTION="" class="form-actions form-horizontal">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+
+        <p><i class="icon-plus"></i><button class="btn btn-primary" type="submit">Update Project</button>
+            <a class="btn btn-medium" href="/">Back</a>
+
+    </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Project {{ project.id }}</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container " >
+        <p>Details of project  {{ project.id }} </p>
+
+        <div class="form-actions">
+            <p>Project Name:   {{ project.project_name }}</p>
+
+            <p>Environment:    {{ project.environment}}</p>
+
+
+    </div>
+        <p> <a class="btn btn-medium" href="/edit/{{ project.id }}">Edit</a>
+            <a class="btn btn-medium" href="/profile/">Back</a>
+        </p>
+
+    </div>
+{% endblock content %}
+

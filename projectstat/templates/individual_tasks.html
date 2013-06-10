@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title >All Tasks</title>
+{% endblock title %}
+{% block extra_head %}
+
+
+{% endblock extra_head %}
+{% block content %}
+
+      <div class="container">
+
+        <div id="notifications">
+        </div>
+
+        <ul class="breadcrumb">
+            <li class='active'>Tasks</li>
+
+        </ul>
+
+        <div class="row">
+            <div class="span12 ">
+
+
+                <div id="simple-search-form">
+                    <form  action="/search/" class="well form-search upform" id="shipment_search" ><div style="margin:0;padding:0;display:inline"></div>
+
+                            <input class="input-medium search-query"  size="30" style="width:220px;" type="text" name="query"/>
+                            <button type="submit" class="btn" >Search</button> &nbsp;&nbsp;
+
+                        <span>&nbsp;&nbsp;</span>
+                        <a href="/addtask/{{ project.id }}" class="btn btn-primary pull-right">Add Task</a>
+
+
+                    </form>
+
+
+                </div>
+                <br/><br/>
+        {% if tasks %}
+			<p class='lead text-success'>Details of {{project.project_name}} </p>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+        {% for task in tasks %}
+			
+                    <tr>
+                        <td>  {{ task.name }}  </td>
+                        <td>  {{ task.description }} </td>
+                        <td style="width:100px;"><a href="/taskdetail/{{ task.id }}" class="btn btn-mini">Details</a></td>
+                        <td> <a href="/edittask/{{ task.id }}" class="btn btn-mini btn-info" rel="nofollow">Edit</a></td>
+                        <td> <a href="/deletetask/{{ task.id }}" class="btn btn-mini btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a> </td>
+
+                    </tr>
+         {% endfor %}
+      {% else %}
+                    <div class="alert alert-block alert-info">
+
+                       No tasks yet, add using button above
+                    </div>
+       {% endif %}
+                </table>
+
+                <br />
+
+
+                <style>
+                    .ship_status li {list-style: none;float: left;padding:0px 0px 0px 65px;font-weight:bold;font-size:13px;}
+                    .ship_status li a{color:#333;}
+                </style>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

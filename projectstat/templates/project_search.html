@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title >Your search results for {{ query }}</title>
+{% endblock title %}
+{% block content %}
+    <div class="container">
+
+    {% if error %}
+        <p style="color: red;">Please submit a search term.</p>
+    {% endif %}
+    {% if projects %}
+        <div class="alert alert-block">
+            <p>Your search results for <i class="errorlist">{{ query}}</i></p>
+
+
+        <ol>
+            {% for project in projects %}
+                <li><a href="/detail/{{ project.id }}">{{ project.project_name }}</a></li>
+            {% endfor %}
+        </ol>
+        </div>
+    {% else %}
+        <div class="alert alert-block">
+            <p >No Projects matched your search term, try again using a different term</p>
+            Your searched for <i class="errorlist">{{ query}}</i>
+        </div>
+        <a class="btn btn-medium" href="/">Back</a>
+    {% endif %}
+    </div>
+{% endblock content %}
